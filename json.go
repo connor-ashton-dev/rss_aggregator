@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func responeWithError(w http.ResponseWriter, code int, msg string) {
+func respondWithError(w http.ResponseWriter, code int, msg string) {
 
 	if code > 499 { //this means that the server went wrong
 		log.Println("Responding with 5XX error:", msg)
@@ -14,12 +14,6 @@ func responeWithError(w http.ResponseWriter, code int, msg string) {
 	type errResponse struct {
 		Error string `json:"error"`
 	}
-	/*
-		looks like
-		{
-			error: "Something went wrong"
-		}
-	*/
 	respondWithJSON(w, code, errResponse{
 		Error: msg,
 	})
